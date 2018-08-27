@@ -41,14 +41,14 @@ What's in the Box?
 
 .. image:: https://sociorocketnewsen.files.wordpress.com/2013/10/maru-top.jpg?w=580&h=305&crop=1
 
-- ✨ Morphological analysis with contextual disambiguation.
-- 🌈 Trained via various machine learning methods: SVM, CRF, deep neural network.
+- ✨ Morphological analysis with contextual disambiguation using `Universal Dependencies <http://universaldependencies.org/u/feat/index.html>`_ tags.
+- 🌈 Trained via various machine learning methods: linear model, CRF, deep neural network.
 - 🔮 Speed/accuracy trade-off between different methods.
 - 🍰 Vocabulary-based lemmatization, built on top of `pymorphy2 <https://github.com/kmike/pymorphy2>`_.
 
 
 Usage
--------
+-----
 
 First, create a `maru.analyzer.Analyzer <https://github.com/chomechome/maru/blob/master/maru/analyzer.py#L13-L36>`_ object using the factory method:
 
@@ -69,3 +69,25 @@ Then, analyze some text:
     Morph(word='мыла', lemma='мыть', tag=Tag(pos=VERB,aspect=Imp,gender=Fem,mood=Ind,number=Sing,tense=Past,verbform=Fin,voice=Act))
     Morph(word='раму', lemma='рама', tag=Tag(pos=NOUN,animacy=Inan,case=Acc,gender=Fem,number=Sing))
 
+Other available taggers that you can pass to `maru.get_analyzer` are `'linear'`, `'rnn'`, and `'pymorphy'`.
+Another available lemmatizer is `'dummy'` (no actual lemmatization, slightly improves inference speed).
+
+You can refer to the following table when choosing an algorithm to use:
+
++-----------------------------------------------------------------------------------------------------+
+|                    Full tag accuracy (per token, per sentence) and inference speed                  |
++----------+--------+--------+--------+--------+--------+--------+--------+--------+------------------+
+| Tagger   |   News (Lenta)  |   Social (VK)   | Literature (JZ) |       All       | Inference speed  |
++==========+========+========+========+========+========+========+========+========+==================+
+| Pymorphy | 77.24% | 12.85% | 72.71% | 18.84% | 73.16% | 10.91% | 74.43% | 14.85% | 49000 tokens/sec |
++----------+--------+--------+--------+--------+--------+--------+--------+--------+------------------+
+| Linear   | 95.00% | 61.73% | 91.64% | 59.51% | 93.00% | 57.87% | 93.26% | 59.62% | 26500 tokens/sec |
++----------+--------+--------+--------+--------+--------+--------+--------+--------+------------------+
+| CRF      | 95.55% | 64.53% | 91.82% | 61.27% | 93.59% | 63.96% | 93.70% | 62.95% |  5500 tokens/sec |
++----------+--------+--------+--------+--------+--------+--------+--------+--------+------------------+
+| RNN      | 97.65% | 79.33% | 95.43% | 75.88% | 95.84% | 73.60% | 96.34% | 76.14% |  1000 tokens/sec |
++----------+--------+--------+--------+--------+--------+--------+--------+--------+------------------+
+
+Accuracy was measured on the `MorphoRuEval-2017 <https://github.com/dialogue-evaluation/morphoRuEval-2017>`_ test set.
+Inference speed was estimated on a system with 32 GB RAM, Intel i7 6700K as CPU and GTX 1060 as GPU.
+RNN performance is given for single sentence inference. An addition of batch inference in the future can greatly improve it.
