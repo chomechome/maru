@@ -1,0 +1,12 @@
+from .animacy import get_animacy  # noqa: F401
+from .aspect import get_aspect  # noqa: F401
+from .case import get_case  # noqa: F401
+from .degree import get_degree  # noqa: F401
+from .gender import get_gender  # noqa: F401
+from .mood import get_mood  # noqa: F401
+from .number import get_number  # noqa: F401
+from .person import get_person  # noqa: F401
+from .pos import get_part_of_speech  # noqa: F401
+from .tense import get_tense  # noqa: F401
+from .verbform import get_verbform  # noqa: F401
+from .voice import get_voice  # noqa: F401
