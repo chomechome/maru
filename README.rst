@@ -69,8 +69,8 @@ Then, analyze some text:
     Morph(word='мыла', lemma='мыть', tag=Tag(pos=VERB,aspect=Imp,gender=Fem,mood=Ind,number=Sing,tense=Past,verbform=Fin,voice=Act))
     Morph(word='раму', lemma='рама', tag=Tag(pos=NOUN,animacy=Inan,case=Acc,gender=Fem,number=Sing))
 
-Other available taggers that you can pass to `maru.get_analyzer` are `'linear'`, `'rnn'`, and `'pymorphy'`.
-Another available lemmatizer is `'dummy'` (no actual lemmatization, slightly improves inference speed).
+Other available taggers that you can pass to ``maru.get_analyzer`` are ``'linear'``, ``'rnn'``, and ``'pymorphy'``.
+Another available lemmatizer is ``'dummy'`` (no actual lemmatization, slightly improves inference speed).
 
 You can refer to the following table when choosing an algorithm to use:
 
