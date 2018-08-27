@@ -13,3 +13,4 @@ from .grammeme import (  # noqa: F401
     get_verbform,
     get_voice,
 )
+from .tag import get_tag  # noqa: F401

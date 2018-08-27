@@ -41,16 +41,16 @@ What's in the Box?
 
 .. image:: https://sociorocketnewsen.files.wordpress.com/2013/10/maru-top.jpg?w=580&h=305&crop=1
 
-- ✨✨✨ Morphological analysis with contextual disambiguation.
-- 🌈🌈🌈 Trained via various machine learning methods: SVM, CRF, deep neural network.
-- 🔮🔮🔮 Speed/accuracy trade-off between different methods.
-- 💬💬💬 Vocabulary-based lemmatization, built on top of `pymorphy2 <https://github.com/kmike/pymorphy2>`_.
+- ✨ Morphological analysis with contextual disambiguation.
+- 🌈 Trained via various machine learning methods: SVM, CRF, deep neural network.
+- 🔮 Speed/accuracy trade-off between different methods.
+- 🍰 Vocabulary-based lemmatization, built on top of `pymorphy2 <https://github.com/kmike/pymorphy2>`_.
 
 
 Usage
 -------
 
-First, create a `maru.analyzer.Analyzer` object using the factory method:
+First, create a `maru.analyzer.Analyzer <https://github.com/chomechome/maru/blob/master/maru/analyzer.py#L13-L36>`_ object using the factory method:
 
 .. code-block:: python
 
