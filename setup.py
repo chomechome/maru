@@ -52,16 +52,17 @@ def get_extra_requirements():
     }
 
 
-def print_in_bold(text: str):
-    print(f'\033[1m{text}\033[0m')
-
-
 class UploadCommand(setuptools.Command):
     """
     Support setup.py upload
     """
     description = 'Build the package and upload it to PyPI'
     user_options = []
+
+    @staticmethod
+    def _print_status(text):
+        """Prints things in bold."""
+        print('\033[1m{0}\033[0m'.format(text))
 
     def initialize_options(self):
         pass
@@ -70,17 +71,17 @@ class UploadCommand(setuptools.Command):
         pass
 
     def run(self):
-        print_in_bold('Removing previous builds...')
+        self._print_status('Removing previous builds...')
         shutil.rmtree('dist', ignore_errors=True)
 
-        print_in_bold('Building source distribution...')
-        os.system(f'{sys.executable} setup.py sdist bdist_wheel')
+        self._print_status('Building source distribution...')
+        os.system('{} setup.py sdist bdist_wheel'.format(sys.executable))
 
-        print_in_bold('Uploading the package to PyPi via Twine...')
+        self._print_status('Uploading the package to PyPi via Twine...')
         os.system('twine upload dist/*')
 
-        print_in_bold('Pushing git tags...')
-        os.system(f'git tag v{get_version()}')
+        self._print_status('Pushing git tags...')
+        os.system('git tag v{}'.format(get_version()))
         os.system('git push --tags')
 
         sys.exit()
