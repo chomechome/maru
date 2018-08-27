@@ -24,7 +24,7 @@ MARu: Morphological Analyzer for Russian
 
 ---------------
 
-**MARu** is a morphological analyzer for Russian, written in Python, backed by machine learning and neural networks.
+**MARu** is a morphological analyzer for Russian, written in Python, powered by machine learning and neural networks.
 
 Installation
 ------------
@@ -89,5 +89,5 @@ You can refer to the following table when choosing an algorithm to use:
 +----------+--------+--------+--------+--------+--------+--------+--------+--------+------------------+
 
 Accuracy was measured on the `MorphoRuEval-2017 <https://github.com/dialogue-evaluation/morphoRuEval-2017>`_ test set.
-Inference speed was estimated on a system with 32 GB RAM, Intel i7 6700K as CPU and GTX 1060 as GPU.
+Inference speed was estimated on a system with 32 GB RAM, Intel i7 6700K as CPU and GeForce GTX 1060 as GPU.
 RNN performance is given for single sentence inference. An addition of batch inference in the future can greatly improve it.
