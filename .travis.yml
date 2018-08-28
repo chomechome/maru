@@ -1,17 +1,18 @@
 language: python
 
 python:
-  - "3.6"
+  - 3.6
 
 install:
   - "pip install pipenv --upgrade"
   - "pipenv install --dev --skip-lock"
 
-script:
-  - "pipenv run pytest -n 8 --boxed"
-
 jobs:
   include:
+    - stage: test
+      python: 3.6
+      script:
+        - "pipenv run pytest -n 8 --boxed"
     - stage: codestyle
       python: 3.6
       script:
