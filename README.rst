@@ -33,7 +33,15 @@ Installation
 
     $ pipenv install maru
 
-or just use `pip` (though you should definitely take a look at `pipenv <https://pipenv.readthedocs.io/en/latest/>`_).
+or
+
+::
+
+    $ pipenv install maru[gpu]
+
+for installation with Tensorflow GPU support.
+
+You can also just use `pip` (though you should definitely take a look at `pipenv <https://pipenv.readthedocs.io/en/latest/>`_).
 
 
 What's in the Box?
@@ -90,4 +98,4 @@ You can refer to the following table when choosing an algorithm to use:
 
 Accuracy was measured on the `MorphoRuEval-2017 <https://github.com/dialogue-evaluation/morphoRuEval-2017>`_ test set.
 Inference speed was estimated on a system with 32 GB RAM, Intel i7 6700K as CPU and GeForce GTX 1060 as GPU.
-RNN performance is given for single sentence inference. An addition of batch inference in the future can greatly improve it.
+RNN performance is given for single sentence inference on GPU. An addition of batch inference in the future can greatly improve it.
