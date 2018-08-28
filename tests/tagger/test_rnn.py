@@ -22,7 +22,6 @@ def test():
                 Tag(
                     pos=PartOfSpeech.ADJECTIVE,
                     case=Case.NOMINATIVE,
-                    gender=Gender.NEUTER,
                     degree=Degree.POSITIVE,
                     number=Number.PLURAL,
                     variant=Variant.FULL,
