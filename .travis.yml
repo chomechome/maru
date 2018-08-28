@@ -1,7 +1,11 @@
 language: python
 
-python:
-  - "3.6"
+matrix:
+  include:
+    - python: 3.6
+    - python: 3.7
+      dist: xenial
+      sudo: true
 
 install:
   - "pip install pipenv --upgrade"
@@ -13,11 +17,11 @@ script:
 jobs:
   include:
     - stage: codestyle
-      python: 3.6
+      python: 3.7
       script:
         - "pipenv run flake8"
     - stage: coverage
-      python: 3.6
+      python: 3.7
       script:
         - "pipenv run pytest --cov=maru"
         - "pipenv run codecov"
