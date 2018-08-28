@@ -22,6 +22,11 @@ MARu: Morphological Analyzer for Russian
     :target: https://codecov.io/github/chomechome/maru
     :alt: Code coverage
 
+.. image:: https://codeclimate.com/github/chomechome/maru/badges/gpa.svg?branch=master
+    :target: https://codeclimate.com/github/chomechome/maru
+    :alt: Code quality
+
+
 ---------------
 
 **MARu** is a morphological analyzer for Russian, written in Python, powered by machine learning and neural networks.
