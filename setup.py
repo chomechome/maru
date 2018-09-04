@@ -90,7 +90,7 @@ class UploadCommand(setuptools.Command):
 setuptools.setup(
     name=PACKAGE,
     version=get_version(),
-    description='Morphological Analyzer for Russian',
+    description='Morphological Analyzer for Russian 💬',
     long_description=get_description(),
     author='Vladislav Blinov',
     author_email='cunningplan@yandex.ru',

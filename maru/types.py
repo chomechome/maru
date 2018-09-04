@@ -1,4 +1,4 @@
-from typing import Iterable, Tuple, Sequence
+from typing import Iterable, Tuple, Sequence, Mapping
 
 Index = int
 Indices = Sequence[Index]
@@ -12,3 +12,5 @@ FeatureValue = float
 Feature = Tuple[FeatureName, FeatureValue]
 FeatureVector = Iterable[Feature]
 FeatureWindow = Iterable[Tuple[Offset, FeatureVector]]
+
+StringVocabulary = Mapping[str, Index]
