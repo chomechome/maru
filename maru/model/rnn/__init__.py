@@ -4,6 +4,7 @@ import os
 from typing import Dict
 
 import keras
+import tensorflow
 from sklearn.externals import joblib
 
 from maru.feature.extractor import IFeatureExtractor
@@ -22,6 +23,12 @@ def load_tags() -> Dict[int, Tag]:
 
 
 def load_tagger() -> keras.Model:
+    # this restrains tensorflow from allocating all of available GPU memory
+    config = tensorflow.ConfigProto()
+    config.gpu_options.allow_growth = True
+
+    keras.backend.set_session(tensorflow.Session(config=config))
+
     return keras.models.load_model(_get_path('tagger.h5'))
 
 
