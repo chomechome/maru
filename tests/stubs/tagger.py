@@ -5,7 +5,7 @@ from maru.tagger.abstract import ITagger, Tagged
 from maru.types import Word, Text, Indices
 
 
-class SingleWordTagger(ITagger):
+class ConstantTagger(ITagger):
     def __init__(self, word: Word, tag: Tag):
         self._word = word
         self._tag = tag

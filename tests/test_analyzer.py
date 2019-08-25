@@ -7,7 +7,8 @@ from maru.analyzer import Analyzer
 from maru.tag import Tag
 from maru.tagger import ITagger
 from maru.types import Text
-from tests.stubs.tagger import SingleWordTagger
+
+from tests.stubs.tagger import ConstantTagger
 
 _UNKNOWN = Tag(pos=PartOfSpeech.UNKNOWN)
 
@@ -47,7 +48,7 @@ def test_tag():
             ),
         ],
         taggers=[
-            SingleWordTagger(
+            ConstantTagger(
                 word='hello',
                 tag=tag,
             ),
@@ -73,7 +74,7 @@ def test_tag_partially():
             ),
         ],
         taggers=[
-            SingleWordTagger(
+            ConstantTagger(
                 word='world',
                 tag=tag,
             ),
