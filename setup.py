@@ -71,18 +71,18 @@ class UploadCommand(setuptools.Command):
         pass
 
     def run(self):
-        self._print_status('Removing previous builds...')
-        shutil.rmtree('dist', ignore_errors=True)
-
-        self._print_status('Building source distribution...')
-        os.system('{} setup.py sdist bdist_wheel'.format(sys.executable))
+        # self._print_status('Removing previous builds...')
+        # shutil.rmtree('dist', ignore_errors=True)
+        #
+        # self._print_status('Building source distribution...')
+        # os.system('{} setup.py sdist bdist_wheel'.format(sys.executable))
 
         self._print_status('Uploading the package to PyPi via Twine...')
         os.system('twine upload dist/*')
 
-        self._print_status('Pushing git tags...')
-        os.system('git tag v{}'.format(get_version()))
-        os.system('git push --tags')
+        # self._print_status('Pushing git tags...')
+        # os.system('git tag v{}'.format(get_version()))
+        # os.system('git push --tags')
 
         sys.exit()
 
