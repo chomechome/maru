@@ -4,6 +4,7 @@ python:
   - 3.6
 
 install:
+  - "pip install pip==18.1"
   - "pip install poetry==0.12.10"
   - "poetry install --no-interaction"
   - "poetry shell"
