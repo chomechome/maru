@@ -7,10 +7,10 @@ authors = ["Vladislav Blinov <cunningplan@yandex.ru>"]
 repository = "https://github.com/chomechome/maru"
 readme = "README.rst"
 classifiers = [
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: Implementation :: CPython',
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: Implementation :: CPython",
 ]
 
 [tool.poetry.dependencies]
