@@ -9,54 +9,25 @@ _PUNCTUATION = Tag(pos=PartOfSpeech.PUNCTUATION)
 
 
 @pytest.mark.parametrize(
-    ['word'],
-    [
-        ['!'],
-        ['@'],
-        ['.....,'],
-        ['?!'],
-        ['"'],
-        [':'],
-        [';'],
-        ['()'],
-        ['%'],
-    ]
+    ['word'], [['!'], ['@'], ['.....,'], ['?!'], ['"'], [':'], [';'], ['()'], ['%']]
 )
 def test_punctuation(word: str):
     assert_tags_equal(
-        tagger=PunctuationTagger(),
-        expected=[
-            (0, _PUNCTUATION),
-        ],
-        words=[word],
+        tagger=PunctuationTagger(), expected=[(0, _PUNCTUATION)], words=[word],
     )
 
 
-@pytest.mark.parametrize(
-    ['word'],
-    [
-        ['12313'],
-        ['unknown'],
-        ['XV'],
-        ['   '],
-        [''],
-    ]
-)
+@pytest.mark.parametrize(['word'], [['12313'], ['unknown'], ['XV'], ['   '], ['']])
 def test_non_punctuation(word: str):
     assert_tags_equal(
-        tagger=PunctuationTagger(),
-        expected=[],
-        words=[word],
+        tagger=PunctuationTagger(), expected=[], words=[word],
     )
 
 
 def test_indices():
     assert_tags_equal(
         tagger=PunctuationTagger(),
-        expected=[
-            (1, _PUNCTUATION),
-            (2, _PUNCTUATION),
-        ],
+        expected=[(1, _PUNCTUATION), (2, _PUNCTUATION)],
         words=['?', ',', '!'],
         indices=[1, 2],
     )

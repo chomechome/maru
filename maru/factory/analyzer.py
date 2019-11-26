@@ -4,10 +4,9 @@ from maru.factory.tagger import get_tagger
 from maru.tagger import NumericalTagger, PunctuationTagger
 
 
-def get_analyzer(tagger: str = 'linear',
-                 lemmatizer: str = 'pymorphy',
-                 cache_size: int = 15000,
-                 ):
+def get_analyzer(
+    tagger: str = 'linear', lemmatizer: str = 'pymorphy', cache_size: int = 15000,
+):
     return Analyzer(
         taggers=[
             PunctuationTagger(),

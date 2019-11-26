@@ -1,5 +1,5 @@
-from .analyzer import analyze  # noqa: F401
-from .grammeme import (  # noqa: F401
+from .analyzer import analyze
+from .grammeme import (
     get_animacy,
     get_aspect,
     get_case,
@@ -7,10 +7,10 @@ from .grammeme import (  # noqa: F401
     get_gender,
     get_mood,
     get_number,
-    get_person,
     get_part_of_speech,
+    get_person,
     get_tense,
     get_verbform,
     get_voice,
 )
-from .tag import get_tag  # noqa: F401
+from .tag import get_tag

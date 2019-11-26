@@ -6,4 +6,4 @@ from maru.tag import Tag
 def test():
     lemmatizer = PymorphyLemmatizer()
 
-    assert 'мыть' == lemmatizer.lemmatize('мыло', Tag(pos=PartOfSpeech.VERB))
+    assert lemmatizer.lemmatize('мыло', Tag(pos=PartOfSpeech.VERB)) == 'мыть'

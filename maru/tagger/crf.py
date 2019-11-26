@@ -2,7 +2,7 @@ from typing import Iterator, Optional
 
 from maru.feature.extractor import Cache
 from maru.feature.window import FeatureWindowGenerator
-from maru.model import crf
+from maru.resource import crf
 from maru.tagger.abstract import ITagger, Tagged
 from maru.types import Indices, Text
 

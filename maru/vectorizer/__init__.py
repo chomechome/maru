@@ -1,5 +1,2 @@
-from .sequential import SequentialVectorizer  # noqa: F401
-from .sparse import (  # noqa: F401
-    SparseFeatureVectorizer,
-    SparseWindowVectorizer,
-)
+from .sequential import SequentialVectorizer
+from .sparse import SparseFeatureVectorizer, SparseWindowVectorizer

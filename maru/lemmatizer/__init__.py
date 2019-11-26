@@ -1,4 +1,4 @@
-from .abstract import ILemmatizer  # noqa: F401
-from .cache import Cache  # noqa: F401
-from .dummy import DummyLemmatizer  # noqa: F401
-from .pymorphy import PymorphyLemmatizer  # noqa: F401
+from .abstract import ILemmatizer
+from .cache import Cache
+from .dummy import DummyLemmatizer
+from .pymorphy import PymorphyLemmatizer

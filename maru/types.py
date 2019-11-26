@@ -1,4 +1,4 @@
-from typing import Iterable, Tuple, Sequence, Mapping
+from typing import Iterable, Mapping, Sequence, Tuple
 
 Index = int
 Indices = Sequence[Index]

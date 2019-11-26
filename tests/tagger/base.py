@@ -1,14 +1,15 @@
 from typing import Sequence
 
-from maru.tagger.abstract import Tagged, ITagger
-from maru.types import Word, Indices
+from maru.tagger.abstract import ITagger, Tagged
+from maru.types import Indices, Word
 
 
-def assert_tags_equal(tagger: ITagger,
-                      expected: Sequence[Tagged],
-                      words: Sequence[Word],
-                      indices: Indices = None,
-                      ):
+def assert_tags_equal(
+    tagger: ITagger,
+    expected: Sequence[Tagged],
+    words: Sequence[Word],
+    indices: Indices = None,
+):
     if indices is None:
         indices = range(len(words))
 

@@ -1,6 +1,6 @@
 import abc
 
-from maru.types import Word, FeatureVector
+from maru.types import FeatureVector, Word
 
 
 class IFeatureExtractor(metaclass=abc.ABCMeta):

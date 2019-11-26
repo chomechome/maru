@@ -5,10 +5,11 @@ from maru.grammeme import PartOfSpeech
 from maru.grammeme.numform import NumericalForm
 from maru.tag import Tag
 from maru.tagger.abstract import ITagger, Tagged
-from maru.types import Text, Indices
+from maru.types import Indices, Text
 
-_REGEX = re.compile(f'(?P<{NumericalForm.REAL}>\d+[.,]\d+$)|'
-                    f'(?P<{NumericalForm.INTEGER}>\d+$)')
+_REGEX = re.compile(
+    rf'(?P<{NumericalForm.REAL}>\d+[.,]\d+$)|' rf'(?P<{NumericalForm.INTEGER}>\d+$)'
+)
 
 _INTEGER = Tag(pos=PartOfSpeech.NUMERICAL, numform=NumericalForm.INTEGER)
 _REAL = Tag(pos=PartOfSpeech.NUMERICAL, numform=NumericalForm.REAL)

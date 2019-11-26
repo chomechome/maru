@@ -2,10 +2,10 @@ from typing import Iterator, Optional
 
 from maru.feature.extractor import Cache
 from maru.feature.window import FeatureWindowGenerator
-from maru.model import linear
+from maru.resource import linear
 from maru.tagger.abstract import ITagger, Tagged
-from maru.types import Text, Indices
-from maru.utils.word import normalize, is_cyrillic
+from maru.types import Indices, Text
+from maru.utils.word import is_cyrillic, normalize
 from maru.vectorizer import SparseWindowVectorizer
 
 

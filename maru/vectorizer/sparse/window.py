@@ -30,7 +30,4 @@ class SparseWindowVectorizer:
         height = len(rows) - 1
         width = self._feature_count
 
-        return csr_matrix(
-            (values, columns, rows),
-            shape=(height, width),
-        )
+        return csr_matrix((values, columns, rows), shape=(height, width),)
