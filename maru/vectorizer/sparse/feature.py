@@ -27,7 +27,4 @@ class SparseFeatureVectorizer:
         height = len(rows) - 1
         width = len(vocabulary)
 
-        return csr_matrix(
-            (values, columns, rows),
-            shape=(height, width),
-        )
+        return csr_matrix((values, columns, rows), shape=(height, width))

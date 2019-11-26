@@ -1,7 +1,7 @@
 from typing import Iterable, Mapping
 
 from maru.feature.extractor import IFeatureExtractor
-from maru.types import Index, Indices, Offset, Text, FeatureWindow
+from maru.types import FeatureWindow, Index, Indices, Offset, Text
 
 
 class FeatureWindowGenerator:
@@ -16,8 +16,6 @@ class FeatureWindowGenerator:
                 features = extractor.extract(text[index])
                 yield (offset, features)
 
-    def generate(self,
-                 text: Text,
-                 indices: Indices) -> Iterable[FeatureWindow]:
+    def generate(self, text: Text, indices: Indices) -> Iterable[FeatureWindow]:
         for center in indices:
             yield self._get_window(text, center)

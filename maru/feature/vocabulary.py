@@ -1,14 +1,14 @@
 import collections
-from typing import Dict, Iterable
+from typing import Counter, Dict, Iterable, List
 
 from maru.feature.window import FeatureWindow
-from maru.types import Index, FeatureName, FeatureVector
+from maru.types import FeatureName, FeatureVector, Index, Offset
 
 
 class FeatureVocabulary(Dict[FeatureName, Index]):
     @classmethod
     def train(cls, features: Iterable[FeatureVector], min_count: int = 2):
-        counts = collections.Counter()
+        counts: Counter[str] = collections.Counter()
         for vector in features:
             counts.update(name for name, _ in vector)
 
@@ -18,27 +18,29 @@ class FeatureVocabulary(Dict[FeatureName, Index]):
         return cls(vocabulary)
 
 
-class PositionalFeatureVocabulary(Dict[Index, FeatureVocabulary]):
+class PositionalFeatureVocabulary(Dict[Offset, FeatureVocabulary]):
     @classmethod
     def train(cls, windows: Iterable[FeatureWindow], min_count: int = 2):
-        vocabularies: Dict[Index, FeatureVocabulary] = {}
-
-        positions = collections.defaultdict(list)
+        features_by_offset: Dict[Offset, List[FeatureVector]] = collections.defaultdict(
+            list
+        )
         for window in windows:
-            for position, features in window:
-                positions[position].append(features)
+            for offset, feature_vector in window:
+                features_by_offset[offset].append(feature_vector)
 
-        offset = 0
-        for position, features in positions.items():
-            vocabulary = FeatureVocabulary.train(features, min_count)
+        vocabulary_by_offset: Dict[Offset, FeatureVocabulary] = {}
+        for offset, feature_matrix in features_by_offset.items():
+            feature_count = (
+                max(max(vocab.values()) for vocab in vocabulary_by_offset.values()) + 1
+            )
+
+            vocabulary = FeatureVocabulary.train(feature_matrix, min_count)
             for feature in vocabulary.keys():
-                vocabulary[feature] += offset
+                vocabulary[feature] += feature_count
 
-            vocabularies[position] = vocabulary
+            vocabulary_by_offset[offset] = vocabulary
 
-            offset = max(vocabulary.values()) + 1
-
-        return cls(vocabularies)
+        return cls(vocabulary_by_offset)
 
     def get_feature_count(self):
         max_index = max(max(vocab.values()) for vocab in self.values())

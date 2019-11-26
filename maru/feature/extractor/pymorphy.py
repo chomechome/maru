@@ -2,7 +2,7 @@ from typing import Set
 
 from maru import pymorphy
 from maru.feature.extractor.abstract import IFeatureExtractor
-from maru.types import Word, FeatureVector
+from maru.types import FeatureVector, Word
 
 
 class PymorphyExtractor(IFeatureExtractor):
@@ -12,7 +12,7 @@ class PymorphyExtractor(IFeatureExtractor):
     def extract(self, word: Word) -> FeatureVector:
         seen: Set[str] = set()
 
-        parses = pymorphy.analyze(word)[:self._hypotheses]
+        parses = pymorphy.analyze(word)[: self._hypotheses]
         for index, parse in enumerate(parses):
             new = [gram for gram in parse.tag.grammemes if gram not in seen]
             if new:

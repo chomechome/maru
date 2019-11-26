@@ -1,10 +1,9 @@
-from typing import Iterable
+from typing import Iterable, List, Tuple
 
 import pytest
 
-from maru.feature.window import FeatureWindowGenerator, FeatureWindow
-from maru.types import Text, Indices
-
+from maru.feature.window import FeatureWindow, FeatureWindowGenerator
+from maru.types import Feature, Indices, Offset, Text
 from tests.stubs.extractor import LengthExtractor
 
 
@@ -13,21 +12,25 @@ def _get_extractor():
     return LengthExtractor()
 
 
-def _assert_windows_equal(expected: Iterable[FeatureWindow],
-                          generator: FeatureWindowGenerator,
-                          text: Text,
-                          indices: Indices = None,
-                          ):
+def _unroll(
+    windows: Iterable[FeatureWindow],
+) -> List[List[Tuple[Offset, List[Feature]]]]:
+    return [
+        [(position, list(features)) for position, features in window]
+        for window in windows
+    ]
+
+
+def _assert_windows_equal(
+    expected: Iterable[FeatureWindow],
+    generator: FeatureWindowGenerator,
+    text: Text,
+    indices: Indices = None,
+):
     actual = generator.generate(text, indices or range(len(text)))
 
-    def unroll(windows: Iterable[FeatureWindow]):
-        return [
-            [(position, list(features)) for position, features in window]
-            for window in windows
-        ]
-
-    expected = unroll(expected)
-    actual = unroll(actual)
+    expected = _unroll(expected)
+    actual = _unroll(actual)
 
     assert len(expected) == len(actual)
     for expected_window, actual_window in zip(expected, actual):
@@ -41,19 +44,9 @@ def test_generate(extractor: LengthExtractor):
 
     text = ['мама', 'мыла', 'раму']
     expected = [
-        [
-            (0, [('мама', 4)]),
-            (1, [('мыла', 4)]),
-        ],
-        [
-            (-1, [('мама', 4)]),
-            (0, [('мыла', 4)]),
-            (1, [('раму', 4)]),
-        ],
-        [
-            (-1, [('мыла', 4)]),
-            (0, [('раму', 4)]),
-        ],
+        [(0, [('мама', 4)]), (1, [('мыла', 4)])],
+        [(-1, [('мама', 4)]), (0, [('мыла', 4)]), (1, [('раму', 4)])],
+        [(-1, [('мыла', 4)]), (0, [('раму', 4)])],
     ]
 
     _assert_windows_equal(expected, generator, text)
@@ -66,9 +59,7 @@ def test_generate_from_single_word(extractor: LengthExtractor):
 
     text = ['мама']
     expected = [
-        [
-            (0, [('мама', 4)]),
-        ],
+        [(0, [('мама', 4)])],
     ]
 
     _assert_windows_equal(expected, generator, text)
@@ -81,16 +72,8 @@ def test_generate_with_indices(extractor: LengthExtractor):
 
     text = ['раз', 'два', 'три']
     expected = [
-        [
-            (-1, [('раз', 3)]),
-            (0, [('два', 3)]),
-            (1, [('три', 3)]),
-        ],
-        [
-            (-2, [('раз', 3)]),
-            (-1, [('два', 3)]),
-            (0, [('три', 3)]),
-        ],
+        [(-1, [('раз', 3)]), (0, [('два', 3)]), (1, [('три', 3)])],
+        [(-2, [('раз', 3)]), (-1, [('два', 3)]), (0, [('три', 3)])],
     ]
 
     _assert_windows_equal(expected, generator, text, indices=[1, 2])

@@ -2,7 +2,7 @@ from typing import Iterator
 
 from maru.tag import Tag
 from maru.tagger.abstract import ITagger, Tagged
-from maru.types import Word, Text, Indices
+from maru.types import Indices, Text, Word
 
 
 class ConstantTagger(ITagger):

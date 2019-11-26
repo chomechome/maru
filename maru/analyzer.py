@@ -1,4 +1,4 @@
-from typing import Sequence, Iterable, Dict
+from typing import Dict, Iterable, Sequence
 
 from maru.grammeme import PartOfSpeech
 from maru.lemmatizer import ILemmatizer
@@ -11,10 +11,9 @@ _UNKNOWN = Tag(pos=PartOfSpeech.UNKNOWN)
 
 
 class Analyzer:
-    def __init__(self,
-                 taggers: Sequence[ITagger],
-                 lemmatizer: ILemmatizer,
-                 ):
+    def __init__(
+        self, taggers: Sequence[ITagger], lemmatizer: ILemmatizer,
+    ):
         self._taggers = taggers
         self._lemmatizer = lemmatizer
 
@@ -22,7 +21,7 @@ class Analyzer:
         tags: Dict[Index, Tag] = {}
 
         length = len(text)
-        indices = range(length)
+        indices: Sequence[int] = range(length)
         for tagger in self._taggers:
             tags.update(tagger.tag(text, indices))
             indices = [index for index in indices if index not in tags]

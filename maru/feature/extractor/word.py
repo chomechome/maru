@@ -1,5 +1,5 @@
 from maru.feature.extractor.abstract import IFeatureExtractor
-from maru.types import Word, FeatureVector
+from maru.types import FeatureVector, Word
 
 
 class WordExtractor(IFeatureExtractor):

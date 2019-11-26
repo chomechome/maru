@@ -3,7 +3,7 @@ from typing import Iterator, Optional
 import numpy
 
 from maru.feature.extractor import Cache
-from maru.model import rnn
+from maru.resource import rnn
 from maru.tagger.abstract import ITagger, Tagged
 from maru.types import Indices, Text
 from maru.utils.word import normalize
@@ -30,8 +30,7 @@ class RNNTagger(ITagger):
 
         self._extractor = extractor
         self._char_vectorizer = SequentialVectorizer(
-            vocabulary=char_vocabulary,
-            max_length=max_word_length,
+            vocabulary=char_vocabulary, max_length=max_word_length,
         )
         self._grammeme_vectorizer = SparseFeatureVectorizer(
             vocabulary=grammeme_vocabulary,

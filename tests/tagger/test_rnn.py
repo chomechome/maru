@@ -1,15 +1,14 @@
 from maru.grammeme import (
-    PartOfSpeech,
     Animacy,
     Case,
+    Degree,
     Gender,
     Number,
-    Degree,
+    PartOfSpeech,
     Variant,
 )
 from maru.tag import Tag
 from maru.tagger import RNNTagger
-
 from tests.tagger.base import assert_tags_equal
 
 
@@ -38,5 +37,5 @@ def test():
                 ),
             ),
         ],
-        words=['необычные', 'дела']
+        words=['необычные', 'дела'],
     )

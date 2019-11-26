@@ -1,7 +1,7 @@
 from typing import Sequence
 
 from maru.feature.extractor import IFeatureExtractor
-from maru.types import Word, FeatureVector
+from maru.types import FeatureVector, Word
 
 
 class StemExtractor(IFeatureExtractor):

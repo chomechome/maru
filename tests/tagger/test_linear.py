@@ -1,15 +1,14 @@
 from maru.grammeme import (
-    PartOfSpeech,
     Animacy,
     Case,
+    Degree,
     Gender,
     Number,
-    Degree,
+    PartOfSpeech,
     Variant,
 )
 from maru.tag import Tag
 from maru.tagger import LinearTagger
-
 from tests.tagger.base import assert_tags_equal
 
 
@@ -26,7 +25,7 @@ def test():
                     gender=Gender.NEUTER,
                     number=Number.SINGULAR,
                     variant=Variant.FULL,
-                )
+                ),
             ),
             (
                 1,

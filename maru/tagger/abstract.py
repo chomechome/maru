@@ -1,8 +1,8 @@
 import abc
-from typing import Tuple, Iterator
+from typing import Iterator, Tuple
 
 from maru.tag import Tag
-from maru.types import Text, Index, Indices
+from maru.types import Index, Indices, Text
 
 Tagged = Tuple[Index, Tag]
 

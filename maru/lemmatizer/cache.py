@@ -1,5 +1,6 @@
-import lru
 from typing import Tuple
+
+import lru
 
 from maru.lemmatizer.abstract import ILemmatizer
 from maru.tag import Tag
