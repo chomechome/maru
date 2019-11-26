@@ -22,7 +22,7 @@ def _assert_analyzed_equal(
 
 def test_unknown():
     _assert_analyzed_equal(
-        expected=[Morph(word='hello', lemma='hello', tag=_UNKNOWN,)],
+        expected=[Morph(word='hello', lemma='hello', tag=_UNKNOWN)],
         taggers=[],
         text=['hello'],
     )
@@ -32,8 +32,8 @@ def test_tag():
     tag = Tag(pos=PartOfSpeech.NOUN)
 
     _assert_analyzed_equal(
-        expected=[Morph(word='hello', lemma='hello', tag=tag,)],
-        taggers=[ConstantTagger(word='hello', tag=tag,)],
+        expected=[Morph(word='hello', lemma='hello', tag=tag)],
+        taggers=[ConstantTagger(word='hello', tag=tag)],
         text=['hello'],
     )
 
@@ -43,9 +43,9 @@ def test_tag_partially():
 
     _assert_analyzed_equal(
         expected=[
-            Morph(word='hello', lemma='hello', tag=_UNKNOWN,),
-            Morph(word='world', lemma='world', tag=tag,),
+            Morph(word='hello', lemma='hello', tag=_UNKNOWN),
+            Morph(word='world', lemma='world', tag=tag),
         ],
-        taggers=[ConstantTagger(word='world', tag=tag,)],
+        taggers=[ConstantTagger(word='world', tag=tag)],
         text=['hello', 'world'],
     )
