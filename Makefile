@@ -15,7 +15,7 @@ lint:
 	$(PYTHON) mypy $(CODE)
 
 test:
-	$(PYTHON) pytest -n 8 --boxed tests
+	$(PYTHON) pytest tests
 
 coverage:
 	$(PYTHON) pytest --cov=maru

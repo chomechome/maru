@@ -1,3 +1,5 @@
+import pytest
+
 from maru.grammeme import (
     Animacy,
     Case,
@@ -9,34 +11,70 @@ from maru.grammeme import (
 )
 from maru.tag import Tag
 from maru.tagger import LinearTagger
-from tests.tagger.base import assert_tags_equal
+from tests.tagger.base import TaggerTest
 
 
-def test():
-    assert_tags_equal(
-        tagger=LinearTagger(),
-        expected=[
-            (
-                0,
-                Tag(
-                    pos=PartOfSpeech.ADJECTIVE,
-                    case=Case.NOMINATIVE,
-                    degree=Degree.POSITIVE,
-                    gender=Gender.NEUTER,
-                    number=Number.SINGULAR,
-                    variant=Variant.FULL,
+@pytest.fixture(name='tagger', scope='session')
+def create_tagger():
+    return LinearTagger()
+
+
+@pytest.mark.parametrize(
+    'test',
+    [
+        TaggerTest(
+            words=['чёрное', 'зеркало'],
+            tags=[
+                (
+                    0,
+                    Tag(
+                        pos=PartOfSpeech.ADJECTIVE,
+                        case=Case.NOMINATIVE,
+                        degree=Degree.POSITIVE,
+                        gender=Gender.NEUTER,
+                        number=Number.SINGULAR,
+                        variant=Variant.FULL,
+                    ),
                 ),
-            ),
-            (
-                1,
-                Tag(
-                    pos=PartOfSpeech.NOUN,
-                    animacy=Animacy.INANIMATE,
-                    case=Case.NOMINATIVE,
-                    gender=Gender.NEUTER,
-                    number=Number.SINGULAR,
+                (
+                    1,
+                    Tag(
+                        pos=PartOfSpeech.NOUN,
+                        animacy=Animacy.INANIMATE,
+                        case=Case.NOMINATIVE,
+                        gender=Gender.NEUTER,
+                        number=Number.SINGULAR,
+                    ),
                 ),
-            ),
-        ],
-        words=['чёрное', 'зеркало'],
-    )
+            ],
+        ),
+        TaggerTest(
+            words=['чёрного', 'зеркала'],
+            tags=[
+                (
+                    0,
+                    Tag(
+                        pos=PartOfSpeech.ADJECTIVE,
+                        case=Case.GENITIVE,
+                        degree=Degree.POSITIVE,
+                        gender=Gender.NEUTER,
+                        number=Number.SINGULAR,
+                        variant=Variant.FULL,
+                    ),
+                ),
+                (
+                    1,
+                    Tag(
+                        pos=PartOfSpeech.NOUN,
+                        animacy=Animacy.INANIMATE,
+                        case=Case.GENITIVE,
+                        gender=Gender.NEUTER,
+                        number=Number.SINGULAR,
+                    ),
+                ),
+            ],
+        ),
+    ],
+)
+def test_linear(test, tagger):
+    test.run(tagger)
