@@ -1,35 +1,37 @@
-import functools
+import gzip
 import json
-import os
+import pathlib
 from typing import Dict
 
+import joblib
 import numpy
-from sklearn.externals import joblib
 
 from maru.feature.extractor import IFeatureExtractor
 from maru.feature.vocabulary import PositionalFeatureVocabulary
 from maru.tag import Tag
 
-_get_path = functools.partial(os.path.join, os.path.dirname(__file__))
+_DIRECTORY = pathlib.Path(__file__).parent.absolute()
 
 
 def load_extractor() -> IFeatureExtractor:
-    return joblib.load(_get_path('extractor.joblib'))
+    return joblib.load(_DIRECTORY / 'extractor.joblib')
 
 
 def load_vocabulary() -> PositionalFeatureVocabulary:
-    with open(_get_path('vocabulary.json'), encoding='utf8') as f:
+    with (_DIRECTORY / 'vocabulary.json').open(encoding='utf8') as f:
         data = {int(index): mapping for index, mapping in json.load(f).items()}
     return PositionalFeatureVocabulary(data)
 
 
 def load_tags() -> Dict[int, Tag]:
-    return joblib.load(_get_path('tags.joblib'))
+    return joblib.load(_DIRECTORY / 'tags.joblib')
 
 
 def load_coefficients() -> numpy.array:
-    return joblib.load(_get_path('coefficients.joblib'))
+    with gzip.open(_DIRECTORY / 'coefficients.gz', 'rb') as data:
+        return numpy.load(data)
 
 
 def load_intercept() -> numpy.array:
-    return joblib.load(_get_path('intercept.joblib'))
+    with gzip.open(_DIRECTORY / 'intercept.gz', 'rb') as data:
+        return numpy.load(data)

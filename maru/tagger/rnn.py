@@ -19,7 +19,7 @@ class RNNTagger(ITagger):
         self._tagger = rnn.load_tagger()
         self._tags = rnn.load_tags()
 
-        _, _, max_word_length = self._tagger.get_layer(_CHAR_INPUT).input_shape
+        _, _, max_word_length = self._tagger.get_layer(_CHAR_INPUT).input_shape[0]
 
         grammeme_vocabulary = rnn.load_grammeme_vocabulary()
         char_vocabulary = rnn.load_char_vocabulary()
