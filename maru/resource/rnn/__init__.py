@@ -3,11 +3,19 @@ import pathlib
 from typing import Dict
 
 import joblib
-import tensorflow.keras
 
 from maru.feature.extractor import IFeatureExtractor
 from maru.feature.vocabulary import FeatureVocabulary
 from maru.tag import Tag
+
+try:
+    import tensorflow.keras
+except ImportError:
+    # dependency missing, issue a warning
+    import warnings
+
+    warnings.warn('tensorflow is not installed, install it with [tf] extra')
+
 
 _DIRECTORY = pathlib.Path(__file__).parent.absolute()
 
@@ -20,7 +28,7 @@ def load_tags() -> Dict[int, Tag]:
     return joblib.load(_DIRECTORY / 'tags.joblib')
 
 
-def load_tagger() -> tensorflow.keras.Model:
+def load_tagger() -> 'tensorflow.keras.Model':
     # this restrains tensorflow from allocating all of available GPU memory
     config = tensorflow.compat.v1.ConfigProto()
     config.gpu_options.allow_growth = True
