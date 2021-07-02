@@ -1,5 +1,7 @@
 import json
 import pathlib
+import typing
+from builtins import type
 from typing import Dict
 
 import joblib
@@ -8,14 +10,8 @@ from maru.feature.extractor import IFeatureExtractor
 from maru.feature.vocabulary import FeatureVocabulary
 from maru.tag import Tag
 
-try:
+if typing.TYPE_CHECKING:
     import tensorflow.keras
-except ImportError:
-    # dependency missing, issue a warning
-    import warnings
-
-    warnings.warn('tensorflow is not installed, install it with [tf] extra')
-
 
 _DIRECTORY = pathlib.Path(__file__).parent.absolute()
 
@@ -29,6 +25,12 @@ def load_tags() -> Dict[int, Tag]:
 
 
 def load_tagger() -> 'tensorflow.keras.Model':
+    try:
+        import tensorflow.keras
+    except ModuleNotFoundError:
+        raise ImportError(
+            'RNN tagger requires TensorFlow. You can install it with "pip install maru[tf]"'
+        )
     # this restrains tensorflow from allocating all of available GPU memory
     config = tensorflow.compat.v1.ConfigProto()
     config.gpu_options.allow_growth = True
