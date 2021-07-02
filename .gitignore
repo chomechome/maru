@@ -63,3 +63,6 @@ ENV/
 
 # idea
 .idea/
+
+# not needed for libraries
+poetry.lock
