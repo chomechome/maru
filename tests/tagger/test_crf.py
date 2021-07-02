@@ -23,7 +23,7 @@ def create_tagger():
     'test',
     [
         TaggerTest(
-            words=['настоящий', 'детектив'],
+            words=['настоящий', 'полковник'],
             tags=[
                 (
                     0,
