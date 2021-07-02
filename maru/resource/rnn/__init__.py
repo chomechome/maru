@@ -1,7 +1,6 @@
 import json
 import pathlib
 import typing
-from builtins import type
 from typing import Dict
 
 import joblib
