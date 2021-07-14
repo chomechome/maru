@@ -26,10 +26,10 @@ def load_tags() -> Dict[int, Tag]:
 def load_tagger() -> 'tensorflow.keras.Model':
     try:
         import tensorflow.keras
-    except ModuleNotFoundError:
+    except ModuleNotFoundError as e:
         raise ImportError(
             'RNN tagger requires TensorFlow. You can install it with "pip install maru[tf]"'
-        )
+        ) from e
     # this restrains tensorflow from allocating all of available GPU memory
     config = tensorflow.compat.v1.ConfigProto()
     config.gpu_options.allow_growth = True
