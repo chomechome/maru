@@ -6,7 +6,7 @@ python:
 install:
   - "pip install -U pip"
   - "pip install poetry"
-  - "poetry install --no-interaction"
+  - "poetry install -E tf --no-interaction --no-ansi"
 
 jobs:
   include:
